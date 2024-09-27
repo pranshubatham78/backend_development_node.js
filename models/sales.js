@@ -53,7 +53,7 @@ const salesSchemas = mongoose.Schema({
     
     
 });
-
+            
 
 
 module.exports = mongoose.model("sales", salesSchemas);
