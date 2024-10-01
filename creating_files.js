@@ -31,7 +31,7 @@ fs.readdir(dirPath , (err,file)=>{ // it takes a call-back function as a paramet
         console.log(item)
     })
 
-})
+});
 
 
 
