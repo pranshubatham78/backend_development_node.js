@@ -1,42 +1,36 @@
 const mongoose = require('mongoose');
-const bcrpyt = require('bcryptjs');
+const bcrypt = require('bcryptjs');
 
 const salesSchemas = mongoose.Schema({
     name: {
         type: String,
         required: true
     },
-
     password: {
         type: String,
-        require: true,
-        length: 16
+        required: true,
+        minlength: 16
     },
     email: {
         type: String,
         required: true,
         unique: true,
-        lowercase: true,
-        minlength: 15,
-        maxlength: 25
+        lowercase: true,   
+        minlength: 15
+    }
+}, { timestamps: true });
 
-},
-
-    timestamps: true
-
-
-});
-// password hashing middleware
+// Password hashing middleware
 salesSchemas.pre('save', async function (next) {
     if (this.isModified('password')) {
         try {
-            const saltsRounds = 10;
-            const salt = await bcrpyt.genSalt(saltsRounds);
-            const hash = await bcrypt.hash(this.password, salt);//create hashpassword
-            console.log(hash);
+            const saltRounds = 10;
+            const salt = await bcrypt.genSalt(saltRounds);
+            const hash = await bcrypt.hash(this.password, salt); // Create hashpassword
             this.password = hash;
             next();
         } catch (error) {
+            console.log(error);
             next(error);
         }
     } else {
@@ -44,8 +38,8 @@ salesSchemas.pre('save', async function (next) {
     }
 });
 
-//Compare password
-userSchema.methods.matchPassword = async function (enteredPassword) {
+// Compare password
+salesSchemas.methods.matchPassword = async function (enteredPassword) {
     return await bcrypt.compare(enteredPassword, this.password);
 };
 
