@@ -22,4 +22,4 @@ if (!token){
 };
 
 
-module.exports = {product};
+module.exports = {protect};
