@@ -1,7 +1,3 @@
-// # Handles authentication logic (registration, login).
-
-const { TokenExpiredError } = require('jsonwebtoken');
-const user = require('../models/user');
 const User = require('../models/user');
 const generateToken = require('../utils/generateToken');
 
