@@ -15,7 +15,6 @@ const connect = async () => {
 };
 
 module.exports = connect;
-=======
 // Connection with mongoose with database
 
 const mongoose = require('mongoose');
